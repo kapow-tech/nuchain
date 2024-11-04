@@ -5,9 +5,11 @@ import (
 
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
+	"cosmossdk.io/orm/model/ormdb"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
+	"nuchain/api/nuchain/audit"
 	"nuchain/x/audit/types"
 )
 
@@ -16,6 +18,7 @@ type (
 		cdc          codec.BinaryCodec
 		storeService store.KVStoreService
 		logger       log.Logger
+		Db           audit.StateStore
 
 		// the address capable of executing a MsgUpdateParams message. Typically, this
 		// should be the x/gov module account.
@@ -34,11 +37,22 @@ func NewKeeper(
 		panic(fmt.Sprintf("invalid authority address: %s", authority))
 	}
 
+	modDb, err := ormdb.NewModuleDB(types.AuditSchema, ormdb.ModuleDBOptions{KVStoreService: storeService})
+	if err != nil {
+		panic(err.Error())
+	}
+	db, err := audit.NewStateStore(modDb)
+	if err != nil {
+		panic(err.Error())
+
+	}
+
 	return Keeper{
 		cdc:          cdc,
 		storeService: storeService,
 		authority:    authority,
 		logger:       logger,
+		Db:           db,
 	}
 }
 

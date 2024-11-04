@@ -1,0 +1,18 @@
+syntax = "proto3";
+package nuchain.audit;
+
+import "cosmos/orm/v1/orm.proto";
+option go_package = "nuchain/x/audit/types";
+
+message Entry {
+    option (cosmos.orm.v1.table) = {
+      id: 1,
+      primary_key : {fields : "datatype,id"}
+    };
+    
+    string actor = 1;
+    string datatype = 2;
+    string id = 3;
+    string data = 4;
+    string timestamp = 5;
+  }

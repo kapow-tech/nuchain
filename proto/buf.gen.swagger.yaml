@@ -12,3 +12,5 @@ plugins:
       - openapi_naming_strategy=fqn
       - json_names_for_fields=false
       - generate_unbound_methods=true
+      - Mcosmos/orm/v1/orm.proto=cosmossdk.io/orm
+      
