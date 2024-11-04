@@ -17,6 +17,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:       "params",
 					Short:     "Shows the parameters of the module",
 				},
+				{
+					RpcMethod:      "GetData",
+					Use:            "get-data [datatype] [id]",
+					Short:          "Query get-data",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "datatype"}, {ProtoField: "id"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
