@@ -28,6 +28,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
+				{
+					RpcMethod:      "PushData",
+					Use:            "push-data [actor] [data-type] [id] [data] [timestamp]",
+					Short:          "Send a push-data tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "actor"}, {ProtoField: "dataType"}, {ProtoField: "id"}, {ProtoField: "data"}, {ProtoField: "timestamp"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
