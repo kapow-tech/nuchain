@@ -1,0 +1,17 @@
+syntax = "proto3";
+package nuchain.audit;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "nuchain/audit/params.proto";
+
+option go_package = "nuchain/x/audit/types";
+
+// GenesisState defines the audit module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
